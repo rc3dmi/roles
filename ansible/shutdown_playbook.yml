@@ -1,0 +1,8 @@
+---
+
+- name: Shutdown machines
+  hosts: student
+  become: true
+  tasks:
+    - name: Shutdown
+      community.general.shutdown:

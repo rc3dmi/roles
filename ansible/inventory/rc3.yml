@@ -1,0 +1,9 @@
+student:
+  hosts:
+    # rc3-[1:24]:
+    rc3-[1:8]:
+    # 9 isn't working
+    rc3-[10:24]:
+desk:
+  hosts:
+    rc3-katedra:

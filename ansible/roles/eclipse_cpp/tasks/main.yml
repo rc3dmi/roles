@@ -1,0 +1,37 @@
+---
+
+- name: Download Eclipse CPP
+  ansible.builtin.get_url:
+    url: "https://www.eclipse.org/downloads/download.php?file=/technology/epp/\
+      downloads/release/{{ eclipse_cpp_release }}/eclipse-cpp-\
+      {{ eclipse_cpp_release | replace('/', '-') }}-linux-gtk-x86_64.tar.gz&r=1"
+    dest: /tmp/eclipse-cpp.tar.gz
+    mode: u=rw,g=,o=
+    checksum: sha512:40ef1339e508dfe07bcbf1ab755cf08df9605507c06e24dc50b6a34ad52331cabdd270d8bf94d6dafa10b4f10a1aeb5dfb8636f1d5d568d39036739caf911d98
+
+- name: Move old Eclipse
+  ansible.builtin.command:
+    cmd: mv /opt/eclipse-cpp /opt/eclipse-cpp-{{ eclipse_cpp_old_release }}
+    creates: /opt/eclipse-cpp-{{ eclipse_cpp_old_release }}
+    removes: /opt/eclipse-cpp
+
+- name: Create destination directory
+  ansible.builtin.file:
+    path: /opt/eclipse-cpp
+    state: directory
+    mode: u=rwx,g=rx,o=rx
+    owner: root
+    group: root
+
+- name: Unpack new release
+  ansible.builtin.unarchive:
+    src: /tmp/eclipse-cpp.tar.gz
+    remote_src: true
+    dest: /opt/eclipse-cpp
+    extra_opts:
+      - --strip-components=1
+
+- name: Remove archive
+  ansible.builtin.file:
+    path: /tmp/eclipse-cpp.tar.gz
+    state: absent

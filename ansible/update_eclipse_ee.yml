@@ -1,0 +1,9 @@
+---
+- name: Update Eclipse EE
+  hosts: student
+  become: true
+  roles:
+    - role: eclipse_ee
+      vars:
+        eclipse_ee_release: 2024-09/R
+        eclipse_ee_old_release: 2023-09

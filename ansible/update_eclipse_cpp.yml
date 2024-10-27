@@ -1,0 +1,9 @@
+---
+- name: Update Eclipse CPP
+  hosts: student
+  become: true
+  roles:
+    - role: eclipse_cpp
+      vars:
+        eclipse_cpp_release: 2024-09/R
+        eclipse_cpp_old_release: 2023-09

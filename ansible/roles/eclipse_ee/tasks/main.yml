@@ -1,0 +1,37 @@
+---
+
+- name: Download Eclipse EE
+  ansible.builtin.get_url:
+    url: "https://www.eclipse.org/downloads/download.php?file=/technology/epp/\
+      downloads/release/{{ eclipse_ee_release }}/eclipse-jee-\
+      {{ eclipse_ee_release | replace('/', '-') }}-linux-gtk-x86_64.tar.gz&r=1"
+    dest: /tmp/eclipse-jee.tar.gz
+    mode: u=rw,g=,o=
+    checksum: sha512:0dfc8262a8af9aa0c97912bdb16d0be0f838ccefd780ee8bf2d3e525054dd1bd59635f946218827555a723f311af57bde015f9abc1180f4088c76f951ab037fc
+
+- name: Move old Eclipse
+  ansible.builtin.command:
+    cmd: mv /opt/eclipse-ee /opt/eclipse-ee-{{ eclipse_ee_old_release }}
+    creates: /opt/eclipse-ee-{{ eclipse_ee_old_release }}
+    removes: /opt/eclipse-ee
+
+- name: Create destination directory
+  ansible.builtin.file:
+    path: /opt/eclipse-ee
+    state: directory
+    mode: u=rwx,g=rx,o=rx
+    owner: root
+    group: root
+
+- name: Unpack new release
+  ansible.builtin.unarchive:
+    src: /tmp/eclipse-jee.tar.gz
+    remote_src: true
+    dest: /opt/eclipse-ee
+    extra_opts:
+      - --strip-components=1
+
+- name: Remove archive
+  ansible.builtin.file:
+    path: /tmp/eclipse-jee.tar.gz
+    state: absent

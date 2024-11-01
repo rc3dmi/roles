@@ -7,3 +7,4 @@
       vars:
         eclipse_ee_release: 2024-09/R
         eclipse_ee_old_release: 2023-09
+        eclipse_ee_sha: 0dfc8262a8af9aa0c97912bdb16d0be0f838ccefd780ee8bf2d3e525054dd1bd59635f946218827555a723f311af57bde015f9abc1180f4088c76f951ab037fc

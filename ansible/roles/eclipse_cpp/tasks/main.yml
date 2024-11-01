@@ -7,7 +7,7 @@
       {{ eclipse_cpp_release | replace('/', '-') }}-linux-gtk-x86_64.tar.gz&r=1"
     dest: /tmp/eclipse-cpp.tar.gz
     mode: u=rw,g=,o=
-    checksum: sha512:40ef1339e508dfe07bcbf1ab755cf08df9605507c06e24dc50b6a34ad52331cabdd270d8bf94d6dafa10b4f10a1aeb5dfb8636f1d5d568d39036739caf911d98
+    checksum: "sha512:{{ eclipse_cpp_sha }}"
 
 - name: Move old Eclipse
   ansible.builtin.command:

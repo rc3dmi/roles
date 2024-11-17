@@ -1,1 +1,1 @@
-ansible_ssh_private_key_file=~/.ssh/racunari
+ansible_ssh_private_key_file: ~/.ssh/racunari

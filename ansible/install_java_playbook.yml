@@ -1,0 +1,10 @@
+---
+
+- name: Install Java
+  hosts: rc3-9
+  remote_user: rc3-admin
+  become: true
+  roles:
+    - role: install_java
+      vars:
+        install_java_version: 21

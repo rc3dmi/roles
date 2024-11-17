@@ -1,0 +1,18 @@
+---
+
+- name: Install required Java version
+  ansible.builtin.dnf:
+    name:
+      - java-{{ install_java_version }}-openjdk-devel
+    state: present
+
+- name: Set desired Java as default
+  block:
+    - name: Set desired Java as default runtime
+      community.general.alternatives:
+        name: java
+        path: java-{{ install_java_version }}-openjdk.x86_64
+    - name: Set desired Java as default compiler
+      community.general.alternatives:
+        name: javac
+        path: java-{{ install_java_version }}-openjdk.x86_64

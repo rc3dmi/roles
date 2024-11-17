@@ -4,3 +4,7 @@ student:
 desk:
   hosts:
     rc3-katedra:
+
+rc3:
+  student:
+  desk:

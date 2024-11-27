@@ -1,0 +1,8 @@
+---
+
+- name: Enable Docker service
+  ansible.builtin.systemd:
+    name: docker.service
+    state: started
+    enabled: true
+    daemon_reload: true

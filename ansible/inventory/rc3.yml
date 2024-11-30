@@ -6,5 +6,6 @@ desk:
     rc3-katedra:
 
 rc3:
-  student:
-  desk:
+  children:
+    student:
+    desk:

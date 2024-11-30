@@ -1,0 +1,8 @@
+---
+
+- name: Setup Wake on Lan service
+  hosts: student
+  remote_user: rc3-admin
+  become: true
+  roles:
+    - role: wake_on_lan

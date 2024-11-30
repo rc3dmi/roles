@@ -1,0 +1,22 @@
+---
+
+- name: Gather ethernet devices
+  ansible.builtin.set_fact:
+    ethernet_devices: "{{ ansible_facts['interfaces'] | select('match', '^e.*') | list }}"
+
+- name: Setup WOL configure service
+  ansible.builtin.template:
+    src: wol-enable.service.j2
+    dest: /etc/systemd/system/wol-enable-{{ item }}.service
+    mode: u=rw,g=r,o=r
+    owner: root
+    group: root
+  loop: ethernet_devices
+
+- name: Enable and run service
+  ansible.builtin.systemd:
+    name: wol-enable-{{ item }}.service
+    daemon_reload: true
+    enabled: true
+    state: started
+  loop: ethernet_devices

@@ -1,0 +1,9 @@
+[Unit]
+Description=Enable Wake-up on LAN for {{ item }}
+
+[Service]
+Type=oneshot
+ExecStart=/sbin/ethtool -s {{ item }} wol g
+
+[Install]
+WantedBy=basic.target

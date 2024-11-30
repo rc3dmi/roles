@@ -4,6 +4,10 @@
   ansible.builtin.set_fact:
     ethernet_devices: "{{ ansible_facts['interfaces'] | select('match', '^e.*') | list }}"
 
+- name: Validate ethernet devices as list
+  ansible.builtin.debug:
+    var: ethernet_devices
+
 - name: Setup WOL configure service
   ansible.builtin.template:
     src: wol-enable.service.j2
@@ -11,7 +15,7 @@
     mode: u=rw,g=r,o=r
     owner: root
     group: root
-  loop: ethernet_devices
+  loop: "{{ ethernet_devices }}"
 
 - name: Enable and run service
   ansible.builtin.systemd:
@@ -19,4 +23,4 @@
     daemon_reload: true
     enabled: true
     state: started
-  loop: ethernet_devices
+  loop: "{{ ethernet_devices }}"

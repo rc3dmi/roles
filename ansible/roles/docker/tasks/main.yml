@@ -1,5 +1,15 @@
 ---
 
+- name: Install all Docker packages
+  ansible.builtin.dnf:
+    name:
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
+      - docker-buildx-plugin
+      - docker-compose-plugin
+    state: present
+
 - name: Enable Docker service
   ansible.builtin.systemd:
     name: docker.service

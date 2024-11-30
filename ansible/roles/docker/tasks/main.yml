@@ -5,6 +5,7 @@
     name:
       - moby-engine
       - runc
+    state: absent
 
 - name: Setup Docker repository
   ansible.builtin.yum_repository:

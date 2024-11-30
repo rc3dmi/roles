@@ -1,0 +1,9 @@
+---
+
+- name: Reboot machines
+  hosts: student
+  become: true
+  tasks:
+    - name: Reboot machine
+      ansible.builtin.command:
+        cmd: "systemctl reboot {{ '--firmware-setup' if reboot_firmware_setup else '' }}"

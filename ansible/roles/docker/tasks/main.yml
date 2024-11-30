@@ -1,5 +1,21 @@
 ---
 
+- name: Remove all previous Docker packages
+  ansible.builtin.dnf:
+    name:
+      - moby-engine
+      - runc
+
+- name: Setup Docker repository
+  ansible.builtin.yum_repository:
+    name: docker-ce-stable
+    baseurl:
+      - https://download.docker.com/linux/fedora/$releasever/$basearch/stable
+    enabled: true
+    gpgcheck: true
+    gpgkey:
+      - https://download.docker.com/linux/fedora/gpg
+
 - name: Install all Docker packages
   ansible.builtin.dnf:
     name:

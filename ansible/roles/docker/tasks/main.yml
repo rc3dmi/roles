@@ -9,6 +9,7 @@
 - name: Setup Docker repository
   ansible.builtin.yum_repository:
     name: docker-ce-stable
+    description: Docker CE Stable - $basearch
     baseurl:
       - https://download.docker.com/linux/fedora/$releasever/$basearch/stable
     enabled: true
